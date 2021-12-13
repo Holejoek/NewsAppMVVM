@@ -9,20 +9,21 @@ import UIKit
 
 
 extension UIView {
-    func createGradient(firstColor: UIColor, secondColor: UIColor, startPoint: CGPoint, endPoint: CGPoint, isAnimated: Bool) {
+    func createGradient(firstColor: UIColor, secondColor: UIColor, startPoint: CGPoint, endPoint: CGPoint, isAnimated: Bool, finalGradien: [UIColor]?) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
         gradientLayer.colors = [ firstColor.cgColor, secondColor.cgColor]
-//        gradientLayer.locations = [0.3, 1]  чекнуть
-//        if isAnimated {
-//            let gradientChangeAnimation = CABasicAnimation(keyPath: "colors")
-//            gradientChangeAnimation.duration = 5.0
-//            gradientChangeAnimation.toValue = [ UIColor..cgColor, UIColor..cgColor ]
-//            gradientChangeAnimation.fillMode = CAMediaTimingFillMode.forwards
-//            gradientChangeAnimation.isRemovedOnCompletion = false
-//            gradientLayer.add(gradientChangeAnimation, forKey: "colorChange")
-//        } // разобрать
+        gradientLayer.locations = [0.3, 1]  //чекнуть
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        if isAnimated {
+            let gradientChangeAnimation = CABasicAnimation(keyPath: "colors")
+            gradientChangeAnimation.duration = 5.0
+            gradientChangeAnimation.toValue = finalGradien?.map({$0.cgColor}) ?? [UIColor.black.cgColor, UIColor.white.cgColor]
+            gradientChangeAnimation.fillMode = CAMediaTimingFillMode.forwards
+            gradientChangeAnimation.isRemovedOnCompletion = false
+            gradientLayer.add(gradientChangeAnimation, forKey: "colorChange")
+        } 
         layer.addSublayer(gradientLayer)
     }
 }
