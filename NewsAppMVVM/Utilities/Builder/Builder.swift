@@ -10,7 +10,7 @@ import UIKit
 
 protocol ModuleBuilderProtocol {
     static func createNewsSourcesModule() -> UIViewController
-    static func createSourceArticlesModule() -> UIViewController
+    static func createSourceArticlesModule(inputId: String) -> UIViewController
     static func createDetailArticleModule() -> UIViewController
 }
 
@@ -18,14 +18,16 @@ final class ModuleBuilder: ModuleBuilderProtocol {
     static func createNewsSourcesModule() -> UIViewController {
         let view = SourcesViewController()
         let networkService = NetworkService()
-        let viewModel = SourcesViewModel(networkService: networkService)
+        let viewModel = SourcesViewModel(view: view, networkService: networkService)
         view.viewModel = viewModel
         return view
     }
     
-    static func createSourceArticlesModule() -> UIViewController {
+    static func createSourceArticlesModule(inputId: String) -> UIViewController {
         let view = ArticlesViewController()
         let networkService = NetworkService()
+        let viewModel = ArticlesViewModel(view: view, networkService: networkService)
+        view.viewModel = viewModel
         return view
     }
     

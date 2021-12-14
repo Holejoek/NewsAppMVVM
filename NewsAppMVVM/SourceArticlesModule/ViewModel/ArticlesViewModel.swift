@@ -7,9 +7,22 @@
 
 import Foundation
 
-
-
-
-class ArticlesViewModel {
+//MARK: Input
+protocol ArticlesViewModelProtocol: AnyObject {
+    init(view: ArticlesViewProtocol, networkService: NetworkServiceProtocol)
     
+}
+//MARK: Output
+protocol ArticlesViewProtocol: AnyObject {
+    
+}
+class ArticlesViewModel: ArticlesViewModelProtocol {
+    required init(view: ArticlesViewProtocol, networkService: NetworkServiceProtocol) {
+        self.view = view
+        self.networkService = networkService
+    }
+    
+   
+    var networkService: NetworkServiceProtocol!
+    weak var view: ArticlesViewProtocol!
 }

@@ -19,13 +19,13 @@ class SourcesViewController: UIViewController {
         super.viewDidLoad()
         configureViewController()
         makeDataBinding()
-        viewModel.getSources()
         self.collectionView.reloadData()
+        viewModel.getSources()
     }
     
     private func configureViewController() {
         navigationController?.navigationBar.topItem?.title = "Выберите источник новостей"
-        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Baskerville", size: 20) ?? UIFont.systemFont(ofSize: 14)]
         view.createGradient(firstColor: .startFirstMainBack, secondColor: .startSecondMainBack, startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 0, y: 1), isAnimated: true, finalGradien: [.firstMainBack, .secondMainBack])
     }
     
@@ -41,6 +41,7 @@ class SourcesViewController: UIViewController {
         let safeAreaInsets = UIApplication.shared.windows[0].safeAreaInsets.top + (self.navigationController?.navigationBar.frame.height ?? 0)  // Необходимо найти альтернативу
         collectionView.frame.origin.y = safeAreaInsets
         collectionView.frame.size.height -= safeAreaInsets
+        
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
         return collectionView
@@ -49,7 +50,6 @@ class SourcesViewController: UIViewController {
     private func makeDataBinding() {
         self.viewModel.sourceNames.bind { [weak self] names in
             self?.sourceNames = names
-            self?.collectionView.reloadData()
         }
         self.viewModel.sourceCategories.bind { [weak self] categories in
             self?.sourceCategories = categories
@@ -58,8 +58,17 @@ class SourcesViewController: UIViewController {
     
 }
 
+//MARK: - Extension
 extension SourcesViewController: SourcesViewProtocol {
-    
+    func showError(error: Error) {
+        let errorNetAlert = UIAlertController(title: "Ошибка", message: "Нет доступа к интернету", preferredStyle: .alert)
+        let errorNetAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        errorNetAlert.addAction(errorNetAction)
+        self.present(errorNetAlert, animated: true, completion: nil)
+    }
+    func updateData() {
+        self.collectionView.reloadData()
+    }
 }
 
 

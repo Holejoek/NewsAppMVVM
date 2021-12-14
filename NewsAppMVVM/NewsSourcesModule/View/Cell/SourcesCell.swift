@@ -14,32 +14,38 @@ class SourcesCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundView = makeBackground()
+        makeCellBackground()
         configureShadowLayer()
+        configSourceNameLabel()
     }
-//    override func draw(_ rect: CGRect) {
-//        configureShadowLayer()
-//    }
+    
     func updateCell(sourceName: String, sourceCategory: String) {
         self.sourceName.text = sourceName
         self.sourceCategory.text = sourceCategory
     }
-     
+    
     private func configureShadowLayer() {
-        self.layer.cornerRadius = 35
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.sourceCellBorderColor.cgColor
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 1, height: 1)
-        self.layer.shadowRadius = 10
-        self.layer.shadowOpacity = 1
-        self.layer.masksToBounds = true
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowRadius = 2
+        self.layer.shadowOpacity = 0.6
+        self.layer.masksToBounds = false
     }
     
-    private func makeBackground() -> UIView {
+    private func makeCellBackground() {
         let view = UIView(frame: self.bounds)
         view.createGradient(firstColor: .firstSourceCellBack, secondColor: .secondSourceCellBack, startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 0, y: 1), isAnimated: false, finalGradien: nil)
-        return view
+        view.layer.cornerRadius = 8
+        view.layer.borderWidth = 0.8
+        view.layer.borderColor = UIColor.sourceCellBorderColor.cgColor
+        view.clipsToBounds = true
+        self.backgroundView = view
+    }
+    
+    private func configSourceNameLabel() {
+        sourceName.adjustsFontSizeToFitWidth = true
+        sourceName.lineBreakMode = .byWordWrapping  // Не работает !?
+        //        sourceName.makeShadowForText()
     }
     
 }

@@ -23,7 +23,7 @@ extension UIView {
             gradientChangeAnimation.fillMode = CAMediaTimingFillMode.forwards
             gradientChangeAnimation.isRemovedOnCompletion = false
             gradientLayer.add(gradientChangeAnimation, forKey: "colorChange")
-        } 
+        }
         layer.addSublayer(gradientLayer)
     }
 }

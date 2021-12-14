@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		351EB9D5276934A50099AD19 /* ArticlesViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EB9D4276934A50099AD19 /* ArticlesViewExtension.swift */; };
+		351EB9D8276935B30099AD19 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EB9D7276935B30099AD19 /* ArticleCell.swift */; };
 		35F1A4E6276651C1001B85C8 /* SourcesViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F1A4E5276651C0001B85C8 /* SourcesViewExtension.swift */; };
 		35F1A4EA2766532C001B85C8 /* SourcesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F1A4E82766532C001B85C8 /* SourcesCell.swift */; };
 		35F1A4EB2766532C001B85C8 /* SourcesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35F1A4E92766532C001B85C8 /* SourcesCell.xib */; };
 		35F1A4ED2767E981001B85C8 /* UIColorExtension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F1A4EC2767E981001B85C8 /* UIColorExtension .swift */; };
+		35F1A4EF276913A2001B85C8 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F1A4EE276913A2001B85C8 /* UILabelExtension.swift */; };
 		35F635E32764EAA30044B17C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F635E22764EAA30044B17C /* AppDelegate.swift */; };
 		35F635E52764EAA30044B17C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F635E42764EAA30044B17C /* SceneDelegate.swift */; };
 		35F635EC2764EAA50044B17C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F635EB2764EAA50044B17C /* Assets.xcassets */; };
@@ -51,10 +54,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		351EB9D4276934A50099AD19 /* ArticlesViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewExtension.swift; sourceTree = "<group>"; };
+		351EB9D7276935B30099AD19 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		35F1A4E5276651C0001B85C8 /* SourcesViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesViewExtension.swift; sourceTree = "<group>"; };
 		35F1A4E82766532C001B85C8 /* SourcesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesCell.swift; sourceTree = "<group>"; };
 		35F1A4E92766532C001B85C8 /* SourcesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourcesCell.xib; sourceTree = "<group>"; };
 		35F1A4EC2767E981001B85C8 /* UIColorExtension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColorExtension .swift"; sourceTree = "<group>"; };
+		35F1A4EE276913A2001B85C8 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		35F635DF2764EAA30044B17C /* NewsAppMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsAppMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35F635E22764EAA30044B17C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35F635E42764EAA30044B17C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +112,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		351EB9D62769359C0099AD19 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				351EB9D7276935B30099AD19 /* ArticleCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		35F1A4E7276652F5001B85C8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				35F63630276505CF0044B17C /* ArticlesViewController.swift */,
+				351EB9D4276934A50099AD19 /* ArticlesViewExtension.swift */,
+				351EB9D62769359C0099AD19 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -312,6 +328,7 @@
 			children = (
 				35F6363C27652F3E0044B17C /* UIViewExtension.swift */,
 				35F1A4EC2767E981001B85C8 /* UIColorExtension .swift */,
+				35F1A4EE276913A2001B85C8 /* UILabelExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -448,14 +465,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				35F1A4ED2767E981001B85C8 /* UIColorExtension .swift in Sources */,
+				351EB9D5276934A50099AD19 /* ArticlesViewExtension.swift in Sources */,
 				35F6363D27652F3E0044B17C /* UIViewExtension.swift in Sources */,
 				35F63631276505CF0044B17C /* ArticlesViewController.swift in Sources */,
+				35F1A4EF276913A2001B85C8 /* UILabelExtension.swift in Sources */,
 				35F6362D276505480044B17C /* SourcesViewModel.swift in Sources */,
 				35F1A4EA2766532C001B85C8 /* SourcesCell.swift in Sources */,
 				35F6362F2765056F0044B17C /* SourcesViewController.swift in Sources */,
 				35F635E32764EAA30044B17C /* AppDelegate.swift in Sources */,
 				35F636142764EAD60044B17C /* NetworkService.swift in Sources */,
 				35F1A4E6276651C1001B85C8 /* SourcesViewExtension.swift in Sources */,
+				351EB9D8276935B30099AD19 /* ArticleCell.swift in Sources */,
 				35F63633276505EC0044B17C /* ArticlesViewModel.swift in Sources */,
 				35F636162764EAED0044B17C /* NetworkModel.swift in Sources */,
 				35F636212764EC510044B17C /* SourceModel.swift in Sources */,
