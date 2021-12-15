@@ -12,13 +12,15 @@ protocol NetworkServiceProtocol {
     func getSources(completion: @escaping (Result<NewsSourcesData?, Error>) -> Void)
     func getSourceArticles(sourceId: String, completion:  @escaping (Result<NewsArticlesData?, Error>) -> Void )
 }
-enum NewsAPIPath: String {
-    case api = "https://newsapi.org/v2/top-headlines"
-    case sources = "/sources?"
-    case sourcesSearching = "?sources="
-    case apiKey = "apiKey=d4dd1ca711bc4c039500209abd9d8bed"
-}
+
 class NetworkService: NetworkServiceProtocol {
+    
+    enum NewsAPIPath: String {
+        case api = "https://newsapi.org/v2/top-headlines"
+        case sources = "/sources?"
+        case sourcesSearching = "?sources="
+        case apiKey = "apiKey=d4dd1ca711bc4c039500209abd9d8bed"
+    }
     
     func getSources(completion: @escaping (Result<NewsSourcesData?, Error>) -> Void) {
         let urlString = NewsAPIPath.api.rawValue + NewsAPIPath.sources.rawValue + NewsAPIPath.apiKey.rawValue

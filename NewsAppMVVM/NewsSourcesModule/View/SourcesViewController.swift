@@ -24,7 +24,7 @@ class SourcesViewController: UIViewController {
     }
     
     private func configureViewController() {
-        navigationController?.navigationBar.topItem?.title = "Выберите источник новостей"
+        self.navigationItem.title = "Выберите источник новостей"
         navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Baskerville", size: 20) ?? UIFont.systemFont(ofSize: 14)]
         view.createGradient(firstColor: .startFirstMainBack, secondColor: .startSecondMainBack, startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 0, y: 1), isAnimated: true, finalGradien: [.firstMainBack, .secondMainBack])
     }
@@ -55,13 +55,20 @@ class SourcesViewController: UIViewController {
             self?.sourceCategories = categories
         }
     }
-    
+
 }
 
 //MARK: - Extension
 extension SourcesViewController: SourcesViewProtocol {
-    func showError(error: Error) {
-        let errorNetAlert = UIAlertController(title: "Ошибка", message: "Нет доступа к интернету", preferredStyle: .alert)
+    func showError(error: Error?, orSomeErrorText: String?) {
+        let errorNetAlert: UIAlertController!
+        if error != nil {
+            let alert = UIAlertController(title: "Ошибка", message: error?.localizedDescription, preferredStyle: .alert)
+            errorNetAlert = alert
+        } else {
+            let alert = UIAlertController(title: "Ошибка", message: orSomeErrorText, preferredStyle: .alert)
+            errorNetAlert = alert
+        }
         let errorNetAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         errorNetAlert.addAction(errorNetAction)
         self.present(errorNetAlert, animated: true, completion: nil)

@@ -19,8 +19,7 @@ class ArticlesViewController: UIViewController {
     }
     
     private func configureViewController() {
-        navigationController?.navigationBar.topItem?.title = "Выберите источник новостей"
-        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Baskerville", size: 20) ?? UIFont.systemFont(ofSize: 14)]
+        self.navigationItem.title = "Список новостей"
         view.createGradient(firstColor: .firstMainBack, secondColor: .secondMainBack, startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 0, y: 1), isAnimated: false, finalGradien: nil)
     }
     
@@ -31,6 +30,7 @@ class ArticlesViewController: UIViewController {
         self.view.addSubview(tableView)
         return tableView
     }
+  
 }
 
 extension ArticlesViewController: ArticlesViewProtocol {

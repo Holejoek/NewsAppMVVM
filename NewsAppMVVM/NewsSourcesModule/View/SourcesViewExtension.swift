@@ -14,10 +14,18 @@ extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataS
     //MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let sourceArticlesScreen = ModuleBuilder.createSourceArticlesModule(inputId: self.viewModel.didSelect(indexPath: indexPath))
-        self.navigationController?.pushViewController(sourceArticlesScreen, animated: true)
+        let sourceArticlesScreen = ModuleBuilder.createSourceArticlesModule(inputSource: self.viewModel.didSelect(indexPath: indexPath))
+            configureNavBackIten() 
+            self.navigationController?.pushViewController(sourceArticlesScreen, animated: true)
     }
     
+    private func configureNavBackIten() {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        backItem.style = .plain
+        backItem.tintColor = .black
+        navigationItem.backBarButtonItem = backItem
+    }
     
     //MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -54,5 +62,6 @@ extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataS
         let insets = self.viewModel.sectionInsets()
         return UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: insets.right)
     }
+    
     
 }
