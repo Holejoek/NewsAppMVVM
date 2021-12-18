@@ -8,10 +8,11 @@
 import Foundation
 import UIKit
 
+
 extension UIColor {
     //MARK: - Main background
     //цвета градиента фона сразу после запуска приложения
-    static var startFirstMainBack: UIColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+    static var startFirstMainBack: UIColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)  // { #colorLiteral }
     static var startSecondMainBack: UIColor = #colorLiteral(red: 0.9218977094, green: 0.6514603496, blue: 0.6022174358, alpha: 1)
     //конечные цвета градиента фона приложения
     static var firstMainBack: UIColor = #colorLiteral(red: 0.9765617251, green: 0.9530979991, blue: 0.9295695424, alpha: 1)

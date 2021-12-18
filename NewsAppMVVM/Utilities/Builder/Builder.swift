@@ -26,7 +26,7 @@ final class ModuleBuilder: ModuleBuilderProtocol {
     static func createSourceArticlesModule(inputSource: Source) -> UIViewController {
         let view = ArticlesViewController()
         let networkService = NetworkService()
-        let viewModel = ArticlesViewModel(view: view, networkService: networkService)
+        let viewModel = ArticlesViewModel(view: view, networkService: networkService, inputSource: inputSource)
         view.viewModel = viewModel
         return view
     }

@@ -15,6 +15,7 @@ class ArticlesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.getArticlesFromSourceId()
         configureViewController()
     }
     
@@ -25,8 +26,11 @@ class ArticlesViewController: UIViewController {
     
     private func makeTableView() -> UITableView {
         let tableView = UITableView(frame: self.view.bounds)
+        tableView.register(ArticleCell.self, forCellReuseIdentifier: ArticleCell.identifier )
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .clear
+//        tableView.separatorColor = .clear
         self.view.addSubview(tableView)
         return tableView
     }
@@ -34,5 +38,11 @@ class ArticlesViewController: UIViewController {
 }
 
 extension ArticlesViewController: ArticlesViewProtocol {
+    func showError() {
+        return
+    }
     
+    func updateCells() {
+        articlesTableView.reloadData()
+    }
 }

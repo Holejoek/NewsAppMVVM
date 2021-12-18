@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		351EB9D5276934A50099AD19 /* ArticlesViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EB9D4276934A50099AD19 /* ArticlesViewExtension.swift */; };
 		351EB9D8276935B30099AD19 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351EB9D7276935B30099AD19 /* ArticleCell.swift */; };
+		352955DA276E27ED00857DE6 /* ArticleViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352955D9276E27ED00857DE6 /* ArticleViewExtension.swift */; };
+		352955DC276E2E4300857DE6 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352955DB276E2E4300857DE6 /* UIImageViewExtension.swift */; };
+		352955DF276E3CC300857DE6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 352955DE276E3CC300857DE6 /* SDWebImage */; };
 		35520D59276A85F800F9F373 /* ArticleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35520D58276A85F700F9F373 /* ArticleCellViewModel.swift */; };
 		35F1A4E6276651C1001B85C8 /* SourcesViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F1A4E5276651C0001B85C8 /* SourcesViewExtension.swift */; };
 		35F1A4EA2766532C001B85C8 /* SourcesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F1A4E82766532C001B85C8 /* SourcesCell.swift */; };
@@ -57,6 +60,8 @@
 /* Begin PBXFileReference section */
 		351EB9D4276934A50099AD19 /* ArticlesViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewExtension.swift; sourceTree = "<group>"; };
 		351EB9D7276935B30099AD19 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		352955D9276E27ED00857DE6 /* ArticleViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewExtension.swift; sourceTree = "<group>"; };
+		352955DB276E2E4300857DE6 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		35520D58276A85F700F9F373 /* ArticleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCellViewModel.swift; sourceTree = "<group>"; };
 		35F1A4E5276651C0001B85C8 /* SourcesViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesViewExtension.swift; sourceTree = "<group>"; };
 		35F1A4E82766532C001B85C8 /* SourcesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesCell.swift; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				352955DF276E3CC300857DE6 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				351EB9D7276935B30099AD19 /* ArticleCell.swift */,
+				352955D9276E27ED00857DE6 /* ArticleViewExtension.swift */,
 				35520D58276A85F700F9F373 /* ArticleCellViewModel.swift */,
 			);
 			path = Cell;
@@ -332,6 +339,7 @@
 				35F6363C27652F3E0044B17C /* UIViewExtension.swift */,
 				35F1A4EC2767E981001B85C8 /* UIColorExtension .swift */,
 				35F1A4EE276913A2001B85C8 /* UILabelExtension.swift */,
+				352955DB276E2E4300857DE6 /* UIImageViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -352,6 +360,9 @@
 			dependencies = (
 			);
 			name = NewsAppMVVM;
+			packageProductDependencies = (
+				352955DE276E3CC300857DE6 /* SDWebImage */,
+			);
 			productName = NewsAppMVVM;
 			productReference = 35F635DF2764EAA30044B17C /* NewsAppMVVM.app */;
 			productType = "com.apple.product-type.application";
@@ -424,6 +435,9 @@
 				Base,
 			);
 			mainGroup = 35F635D62764EAA30044B17C;
+			packageReferences = (
+				352955DD276E3CC200857DE6 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 35F635E02764EAA30044B17C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -481,8 +495,10 @@
 				35F1A4E6276651C1001B85C8 /* SourcesViewExtension.swift in Sources */,
 				351EB9D8276935B30099AD19 /* ArticleCell.swift in Sources */,
 				35F63633276505EC0044B17C /* ArticlesViewModel.swift in Sources */,
+				352955DC276E2E4300857DE6 /* UIImageViewExtension.swift in Sources */,
 				35F636162764EAED0044B17C /* NetworkModel.swift in Sources */,
 				35F636212764EC510044B17C /* SourceModel.swift in Sources */,
+				352955DA276E27ED00857DE6 /* ArticleViewExtension.swift in Sources */,
 				35F6362B276500130044B17C /* Builder.swift in Sources */,
 				35F6363827651F720044B17C /* DetailViewModel.swift in Sources */,
 				35F636232764EC840044B17C /* ArticleModel.swift in Sources */,
@@ -842,6 +858,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		352955DD276E3CC200857DE6 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		352955DE276E3CC300857DE6 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 352955DD276E3CC200857DE6 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 35F635D72764EAA30044B17C /* Project object */;
 }

@@ -7,7 +7,15 @@
 
 import Foundation
 
+protocol ArticleCellViewModelProtocol {
+    var associatedClass: ArticleCellProtocol.Type { get set }
+}
 
-class ArticleCellViewModel {
+struct ArticleCellViewModel: ArticleCellViewModelProtocol {
+    var associatedClass: ArticleCellProtocol.Type = ArticleCell.self
     
+    let title: String?
+    let author: String?
+    let publishedAt: String?
+    let imageURL: String?
 }

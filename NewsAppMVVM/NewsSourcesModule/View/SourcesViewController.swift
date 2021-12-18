@@ -25,7 +25,7 @@ class SourcesViewController: UIViewController {
     
     private func configureViewController() {
         self.navigationItem.title = "Выберите источник новостей"
-        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Baskerville", size: 20) ?? UIFont.systemFont(ofSize: 14)]
+        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Baskerville", size: 20) ?? UIFont.systemFont(ofSize: 20)]
         view.createGradient(firstColor: .startFirstMainBack, secondColor: .startSecondMainBack, startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 0, y: 1), isAnimated: true, finalGradien: [.firstMainBack, .secondMainBack])
     }
     
