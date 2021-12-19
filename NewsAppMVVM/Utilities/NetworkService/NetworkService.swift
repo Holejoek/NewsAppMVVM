@@ -10,7 +10,8 @@ import Foundation
 
 protocol NetworkServiceProtocol {
     func getSources(completion: @escaping (Result<NewsSourcesData?, Error>) -> Void)
-    func getSourceArticles(sourceId: String, completion:  @escaping (Result<NewsArticlesData?, Error>) -> Void )
+    func getSourceArticles(sourceId: String, completion:  @escaping (Result<NewsArticlesData?, Error>) -> Void)
+    func getArticlesFromSearch(searchText: String, completion: @escaping (Result<NewsArticlesData?, Error>) -> Void)
 }
 
 class NetworkService: NetworkServiceProtocol {
@@ -19,7 +20,8 @@ class NetworkService: NetworkServiceProtocol {
         case api = "https://newsapi.org/v2/top-headlines"
         case sources = "/sources?"
         case sourcesSearching = "?sources="
-        case apiKey = "apiKey=d4dd1ca711bc4c039500209abd9d8bed"
+//        case apiKey = "apiKey=d4dd1ca711bc4c039500209abd9d8bed"
+        case apiKey = "apiKey=5c39d7658a104dcc949e70ae70e4d811" // на случай if totalRequest > 100 in day
     }
     
     func getSources(completion: @escaping (Result<NewsSourcesData?, Error>) -> Void) {
@@ -60,6 +62,14 @@ class NetworkService: NetworkServiceProtocol {
             }
         }.resume()
     }
+    
+    func getArticlesFromSearch(searchText: String, completion: @escaping (Result<NewsArticlesData?, Error>) -> Void) {
+        return
+    }
+    
+    
+    
+    
     
 }
 

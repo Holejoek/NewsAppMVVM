@@ -19,8 +19,8 @@ class ArticleCell: UITableViewCell, ArticleCellProtocol {
     
     //MARK: Elements 
     var containerView = UIView()
-    var title = UILabel(text: "", fontSize: 18, fontName: "Baskerville", textColor: .black, textAlignment: .left, shadowColor: nil, numberOfLines: 0)
-    var author = UILabel(text: "", fontSize: 15, fontName: "Baskerville", textColor: .black, textAlignment: .center, shadowColor: nil, numberOfLines: 1)
+    var title = UILabel(text: "", fontSize: 15, fontName: "Baskerville", textColor: .black, textAlignment: .left, shadowColor: nil, numberOfLines: 0)
+    var author = UILabel(text: "", fontSize: 18, fontName: "Baskerville", textColor: .black, textAlignment: .center, shadowColor: nil, numberOfLines: 2)
     var publishedAt = UILabel(text: "", fontSize: 15, fontName: "Baskerville", textColor: .black, textAlignment: .right, shadowColor: nil, numberOfLines: 1)
     var articleImage = UIImageView(image: UIImage(), cornerRadius: 10)
     
@@ -59,7 +59,15 @@ class ArticleCell: UITableViewCell, ArticleCellProtocol {
         guard let stringURL = viewModel.imageURL else { return }
         guard let imageURL = URL(string: stringURL) else { return }
         
-        self.articleImage.sd_setImage(with: imageURL, placeholderImage: UIImage())
+        //MARK: - SDWebImage
+        self.articleImage.sd_setImage(with: imageURL) { image, error, _, _ in
+            if error != nil {
+                self.articleImage.image = UIImage(named: "notFound") ?? UIImage()
+            }
+            if image == nil {
+                self.articleImage.image = UIImage(named: "notFound") ?? UIImage()
+            }
+        }
     }
 
 }

@@ -12,7 +12,7 @@ class SourcesViewController: UIViewController {
     
     var viewModel: SourcesViewModelProtocol!
     lazy var collectionView: UICollectionView = makeCollectionView()
-    var sourceNames = [String]() 
+    var sourceNames = [String]()
     var sourceCategories = [String]()
     
     override func viewDidLoad() {
@@ -55,10 +55,9 @@ class SourcesViewController: UIViewController {
             self?.sourceCategories = categories
         }
     }
-
 }
 
-//MARK: - Extension
+//MARK: - Extension OutputVM
 extension SourcesViewController: SourcesViewProtocol {
     func showError(error: Error?, orSomeErrorText: String?) {
         let errorNetAlert: UIAlertController!

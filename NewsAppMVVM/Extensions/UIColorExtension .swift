@@ -22,5 +22,5 @@ extension UIColor {
     static var sourceCellBorderColor: UIColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
     
     static var firstSourceCellBack: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    static var secondSourceCellBack: UIColor = #colorLiteral(red: 0.9799979329, green: 0.5073964596, blue: 0.03172317147, alpha: 1)
+    static var secondSourceCellBack: UIColor = #colorLiteral(red: 0.9450269341, green: 0.9566741586, blue: 0.8268028498, alpha: 1)
 }

@@ -20,8 +20,8 @@ extension ArticleCell {
         
         articleImage.translatesAutoresizingMaskIntoConstraints = false
         articleImage.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 5).isActive = true
-        articleImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
-        articleImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20).isActive = true
+        articleImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true
+        articleImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -30).isActive = true
         articleImage.widthAnchor.constraint(equalTo: articleImage.heightAnchor, constant: 0).isActive = true
         
         
@@ -29,16 +29,21 @@ extension ArticleCell {
         author.leftAnchor.constraint(equalTo: articleImage.rightAnchor, constant: 10).isActive = true
         author.topAnchor.constraint(equalTo: articleImage.topAnchor, constant: 0).isActive = true
         author.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
+//        author.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         
         title.translatesAutoresizingMaskIntoConstraints = false
         title.leftAnchor.constraint(equalTo: articleImage.rightAnchor, constant: 10).isActive = true
-        title.topAnchor.constraint(equalTo: author.bottomAnchor, constant: 10).isActive = true
+        title.topAnchor.constraint(equalTo: author.bottomAnchor, constant: 10).isActive
+        = true
+//        title.bottomAnchor.constraint(equalTo: publishedAt.topAnchor, constant: -10).isActive = true
         title.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
         
+        
+        
         publishedAt.translatesAutoresizingMaskIntoConstraints = false
-        publishedAt.leftAnchor.constraint(equalTo: articleImage.rightAnchor, constant: 10).isActive = true
-        publishedAt.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10).isActive = true
+        publishedAt.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = true
+//        publishedAt.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10).isActive = true
         publishedAt.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
        
     }

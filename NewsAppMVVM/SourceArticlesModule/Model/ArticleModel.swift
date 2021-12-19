@@ -24,9 +24,14 @@ struct Article: Codable {
       formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
       return formatter
     }()
-
-    var convertedDate: Date {
-        return Self.dateFormatter.date(from: publishedAt) ?? Date()
+   
+     var convertedDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "'Дата: 'MM.dd ' время: ' HH:mm "
+          dateFormatter.timeZone = TimeZone(secondsFromGMT: 10800)
+        let dateDate = Self.dateFormatter.date(from: publishedAt) ?? Date()
+        let stringDate = dateFormatter.string(from: dateDate)
+        return stringDate
         }
 
 }

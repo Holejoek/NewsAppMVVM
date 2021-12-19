@@ -15,9 +15,10 @@ protocol ArticlesViewModelProtocol: AnyObject {
     func getArticleCellViewModel(indexPath: IndexPath) -> ArticleCellViewModelProtocol
     func getNumberOfRows(inSection: Int) -> Int
     func getHeightOfRow(forIndexPath: IndexPath) -> CGFloat
-    
+    func getVCTitile() -> String
     // networkService
     func getArticlesFromSourceId()
+    func getArticlesFromSearchText(text: String)
     
 }
 //MARK: Output
@@ -28,6 +29,7 @@ protocol ArticlesViewProtocol: AnyObject {
 
 
 class ArticlesViewModel: ArticlesViewModelProtocol {
+    
     required init(view: ArticlesViewProtocol, networkService: NetworkServiceProtocol, inputSource: Source) {
         self.view = view
         self.networkService = networkService
@@ -43,7 +45,8 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
     //MARK: - input TableView
     func getArticleCellViewModel(indexPath: IndexPath) -> ArticleCellViewModelProtocol {
         let article = loadedArticles[indexPath.row]
-        return ArticleCellViewModel(title: article.title, author: article.author, publishedAt: article.publishedAt, imageURL: article.urlToImage)
+//        print(article.urlToImage)
+        return ArticleCellViewModel(title: article.title, author: article.author, publishedAt: article.convertedDate, imageURL: article.urlToImage)
     }
     
     func getNumberOfRows(inSection: Int) -> Int {
@@ -52,6 +55,10 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
     
     func getHeightOfRow(forIndexPath: IndexPath) -> CGFloat {
         return 200
+    }
+    
+    func getVCTitile() -> String {
+        return inputSource.name
     }
     //MARK: - NetworkService
     func getArticlesFromSourceId() {
@@ -64,11 +71,15 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
                 }
                 self?.loadedArticles = articles.articles
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error)
             }
             self?.view.updateCells()
             }
         }
+    }
+    
+    func getArticlesFromSearchText(text: String) {
+        return
     }
     
 }
