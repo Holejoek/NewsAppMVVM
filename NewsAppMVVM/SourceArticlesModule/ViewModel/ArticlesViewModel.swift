@@ -8,20 +8,20 @@
 import Foundation
 import CoreGraphics
 
-//MARK: Input
+//MARK: Input protocol
 protocol ArticlesViewModelProtocol: AnyObject {
     init(view: ArticlesViewProtocol, networkService: NetworkServiceProtocol, inputSource: Source)
     //input tableView
     func getArticleCellViewModel(indexPath: IndexPath) -> ArticleCellViewModelProtocol
     func getNumberOfRows(inSection: Int) -> Int
     func getHeightOfRow(forIndexPath: IndexPath) -> CGFloat
-    func getVCTitile() -> String
+    func getViewTitle() -> String
     // networkService
     func getArticlesFromSourceId()
     func getArticlesFromSearchText(text: String)
     
 }
-//MARK: Output
+//MARK: Output protocol
 protocol ArticlesViewProtocol: AnyObject {
     func updateCells()
     func showError()
@@ -38,17 +38,17 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
     
     var networkService: NetworkServiceProtocol!
     weak var view: ArticlesViewProtocol!
-    
     let inputSource: Source!
-    var loadedArticles = [Article]()
     
-    //MARK: - input TableView
+    
+    
+    //MARK: - Input TableView
     func getArticleCellViewModel(indexPath: IndexPath) -> ArticleCellViewModelProtocol {
         let article = loadedArticles[indexPath.row]
-//        print(article.urlToImage)
+        getMoreData(indexPath: indexPath, searchFlag: searchFlag)
         return ArticleCellViewModel(title: article.title, author: article.author, publishedAt: article.convertedDate, imageURL: article.urlToImage)
     }
-    
+
     func getNumberOfRows(inSection: Int) -> Int {
         return loadedArticles.count
     }
@@ -57,29 +57,100 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
         return 200
     }
     
-    func getVCTitile() -> String {
+    func getViewTitle() -> String {
         return inputSource.name
     }
+    
     //MARK: - NetworkService
+    
     func getArticlesFromSourceId() {
-        networkService.getSourceArticles(sourceId: inputSource.id) { [weak self] result in
+        executeRequest(with: .load)
+    }
+    
+    func getArticlesFromSearchText(text: String) {
+        textForSearching = text
+        executeRequest(with: .search)
+    }
+    
+    private var loadedArticles = [Article]()
+    private var totalResults: Int!
+    private var currentPage: Int = 1
+    private var textForSearching: String = ""
+    private let maxNumberOfResults = 100
+    private var searchFlag = false
+    
+    private enum TypeOfRequest {
+        case load
+        case loadMore
+        case search
+        case searchMore
+    }
+    
+    private func executeRequest(with typeOfRequest: TypeOfRequest) {
+        switch typeOfRequest {
+        case .load:
+            searchFlag = false
+            currentPage = 1
+            loadArticles()
+        case .loadMore:
+            currentPage += 1
+            loadArticles()
+        case .search:
+            searchFlag = true
+            currentPage = 1
+            loadedArticles.removeAll()
+            searchArticles()
+        case .searchMore:
+            currentPage += 1
+            searchArticles()
+        }
+    }
+    
+    private func loadArticles() {
+        networkService.getSourceArticles(sourceId: inputSource.id, page: currentPage) { [weak self] result in
             DispatchQueue.main.async {
-            switch result {
-            case .success(let articles):
-                guard let articles = articles else {
-                    return
+                switch result {
+                case .success(let articles):
+                    guard let articles = articles else {
+                        return
+                    }
+                    self?.loadedArticles += articles.articles
+                    self?.totalResults = articles.totalResults
+                case .failure(let error):
+                    print(error)
                 }
-                self?.loadedArticles = articles.articles
-            case .failure(let error):
-                print(error)
-            }
-            self?.view.updateCells()
+                self?.view.updateCells()
             }
         }
     }
     
-    func getArticlesFromSearchText(text: String) {
-        return
+    private func searchArticles() {
+        networkService.getArticlesFromSearch(searchText: textForSearching, ofSource: inputSource.id, page: currentPage) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let articles):
+                    guard let articles = articles else {
+                        return
+                    }
+                    self?.loadedArticles += articles.articles
+                    self?.totalResults = articles.totalResults
+                    print(articles.totalResults)
+                case .failure(let error):
+                    print(error)
+                }
+                self?.view.updateCells()
+            }
+        }
     }
     
+    private func getMoreData(indexPath: IndexPath, searchFlag: Bool ) {
+        guard loadedArticles.count < maxNumberOfResults else { return }
+        guard loadedArticles.count < totalResults else { return }
+        guard loadedArticles[indexPath.row].title == loadedArticles.last?.title  else { return }
+        if searchFlag == false {
+            executeRequest(with: .loadMore)
+        } else {
+            executeRequest(with: .searchMore)
+        }
+    }
 }

@@ -20,7 +20,7 @@ struct NewsSourcesData: Codable {
 // MARK: - Articles
 struct NewsArticlesData: Codable {
     let status: String
-    let totalResults: Int
+    let totalResults: Int?
     let articles: [Article]
 }
 

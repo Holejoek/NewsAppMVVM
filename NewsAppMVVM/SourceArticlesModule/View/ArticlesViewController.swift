@@ -14,7 +14,7 @@ class ArticlesViewController: UIViewController {
     lazy var articlesTableView: UITableView = makeTableView()
     
     let searchController = UISearchController()
-    
+      
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getArticlesFromSourceId()
@@ -23,11 +23,19 @@ class ArticlesViewController: UIViewController {
     }
     
     private func configureViewController() {
-        title = viewModel.getVCTitile()
+        title = viewModel.getViewTitle()
         view.createGradient(firstColor: .firstMainBack, secondColor: .secondMainBack, startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 0, y: 1), isAnimated: false, finalGradien: nil)
         
+        //DismissKeyBoard
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(dismissKeybord))
+        tapScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapScreen)
         configureSearchController()
     }
+    
+    @objc func dismissKeybord(sender: UITapGestureRecognizer) {
+        self.searchController.searchBar.endEditing(true)
+     }
     
     private func makeTableView() -> UITableView {
         let tableView = UITableView(frame: self.view.bounds)

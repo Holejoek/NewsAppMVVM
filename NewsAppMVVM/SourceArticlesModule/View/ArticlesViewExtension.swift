@@ -25,7 +25,7 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UI
     //MARK: - UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-        print(searchText)
+        viewModel.getArticlesFromSearchText(text: searchText)
     }
     
 }
