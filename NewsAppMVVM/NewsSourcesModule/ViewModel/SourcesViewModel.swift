@@ -90,7 +90,7 @@ final class SourcesViewModel: SourcesViewModelProtocol {
     
     //MARK: NetworkService
     func getSources() {
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkTimeNetConnection), userInfo: nil, repeats: false) // Если страница не загружается в течении некоторого времени, то выкидывается ошибка
+        Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(checkTimeNetConnection), userInfo: nil, repeats: false) // Если страница не загружается в течении некоторого времени, то выкидывается ошибка
         networkService.getSources { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

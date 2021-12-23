@@ -10,6 +10,7 @@ import UIKit
 
 extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
+    //MARK: DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.getNumberOfRows(inSection: section)
     }
@@ -18,8 +19,17 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UI
         return tableView.getCell(from: viewModel.getArticleCellViewModel(indexPath: indexPath)) as! UITableViewCell
     }
     
+    //MARK: Delegate
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         viewModel.getHeightOfRow(forIndexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = viewModel.didSelect(indexPath: indexPath)
+        guard let source = viewModel.inputSource else { return }
+        let nextScreen = ModuleBuilder.createDetailArticleModule(inputArticle: article, inputSource: source)
+        self.navigationController?.pushViewController(nextScreen, animated: true)
     }
     
     //MARK: - UISearchResultsUpdating

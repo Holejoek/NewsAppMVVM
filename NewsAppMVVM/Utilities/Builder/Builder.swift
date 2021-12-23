@@ -11,7 +11,7 @@ import UIKit
 protocol ModuleBuilderProtocol {
     static func createNewsSourcesModule() -> UIViewController
     static func createSourceArticlesModule(inputSource: Source) -> UIViewController
-    static func createDetailArticleModule() -> UIViewController
+    static func createDetailArticleModule(inputArticle: Article, inputSource: Source) -> UIViewController
 }
 
 final class ModuleBuilder: ModuleBuilderProtocol {
@@ -31,8 +31,10 @@ final class ModuleBuilder: ModuleBuilderProtocol {
         return view
     }
     
-    static func createDetailArticleModule() -> UIViewController {
+    static func createDetailArticleModule(inputArticle: Article, inputSource: Source) -> UIViewController {
         let view = DetailViewController()
+        let viewModel = DetailViewModel(view: view, inputArticle: inputArticle, inputSource: inputSource)
+        view.viewModel = viewModel
         return view
     }
     

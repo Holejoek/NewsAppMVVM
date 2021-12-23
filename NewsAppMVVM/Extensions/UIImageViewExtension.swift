@@ -10,10 +10,10 @@ import UIKit
 
 
 extension UIImageView {
-    convenience init(image: UIImage, cornerRadius: CGFloat) {
+    convenience init(image: UIImage, cornerRadius: CGFloat, contentMode: UIView.ContentMode ) {
         self.init()
         self.image = image
-        self.contentMode = .scaleAspectFill
+        self.contentMode = contentMode
         self.layer.cornerRadius = cornerRadius
         self.layer.borderWidth = 0
         self.layer.masksToBounds = true

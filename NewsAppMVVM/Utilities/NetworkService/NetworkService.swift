@@ -49,7 +49,6 @@ class NetworkService: NetworkServiceProtocol {
     func getSourceArticles(sourceId: String, page: Int, completion: @escaping (Result<NewsArticlesData?, Error>) -> Void) {
         let requestParameters = makeSrtingRequestParameters(with: .loadArticles, sourceId: sourceId, page:  page, searchText: nil)
         let urlString = NewsAPIPath.base.rawValue + NewsAPIPath.everything.rawValue + requestParameters
-        print( urlString)
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in

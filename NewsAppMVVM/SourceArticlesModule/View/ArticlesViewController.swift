@@ -12,7 +12,7 @@ class ArticlesViewController: UIViewController {
     
     var viewModel: ArticlesViewModel!
     lazy var articlesTableView: UITableView = makeTableView()
-    
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     let searchController = UISearchController()
       
     override func viewDidLoad() {
@@ -30,7 +30,11 @@ class ArticlesViewController: UIViewController {
         let tapScreen = UITapGestureRecognizer(target: self, action: #selector(dismissKeybord))
         tapScreen.cancelsTouchesInView = false
         view.addGestureRecognizer(tapScreen)
+        
+        
         configureSearchController()
+        articlesTableView.addSubview(activityIndicator)
+        activityIndicator.center = articlesTableView.center
     }
     
     @objc func dismissKeybord(sender: UITapGestureRecognizer) {
@@ -50,8 +54,8 @@ class ArticlesViewController: UIViewController {
     private func configureSearchController() {
         navigationItem.searchController = searchController
         navigationItem.searchController?.searchResultsUpdater = self
-//        navigationItem.searchController?.hidesNavigationBarDuringPresentation = false
-//        navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController?.hidesNavigationBarDuringPresentation = true
+        navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
         
         
         searchController.searchBar.placeholder = "Only English please"
@@ -68,5 +72,16 @@ extension ArticlesViewController: ArticlesViewProtocol {
     
     func updateCells() {
         articlesTableView.reloadData()
+        updating(false)
+    }
+    
+    func updating(_ flag: Bool) {
+        activityIndicator.isHidden = flag
+        switch flag {
+        case true:
+            activityIndicator.startAnimating()
+        case false:
+            activityIndicator.stopAnimating()
+        }
     }
 }

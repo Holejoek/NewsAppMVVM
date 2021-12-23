@@ -16,6 +16,8 @@ protocol ArticlesViewModelProtocol: AnyObject {
     func getNumberOfRows(inSection: Int) -> Int
     func getHeightOfRow(forIndexPath: IndexPath) -> CGFloat
     func getViewTitle() -> String
+    //dataTransport
+    func didSelect(indexPath: IndexPath) -> Article
     // networkService
     func getArticlesFromSourceId()
     func getArticlesFromSearchText(text: String)
@@ -25,6 +27,7 @@ protocol ArticlesViewModelProtocol: AnyObject {
 protocol ArticlesViewProtocol: AnyObject {
     func updateCells()
     func showError()
+    func updating(_ flag: Bool)
 }
 
 
@@ -60,6 +63,12 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
     func getViewTitle() -> String {
         return inputSource.name
     }
+    //MARK: - DataTransport
+    
+    func didSelect(indexPath: IndexPath) -> Article {
+        let article = loadedArticles[indexPath.row]
+        return article
+    }
     
     //MARK: - NetworkService
     
@@ -68,7 +77,7 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
     }
     
     func getArticlesFromSearchText(text: String) {
-        textForSearching = text
+        textForSearching = text.replacingOccurrences(of: " ", with: "_")
         executeRequest(with: .search)
     }
     
@@ -107,6 +116,7 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
     }
     
     private func loadArticles() {
+        self.view.updating(true)
         networkService.getSourceArticles(sourceId: inputSource.id, page: currentPage) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -125,6 +135,7 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
     }
     
     private func searchArticles() {
+        self.view.updating(true)
         networkService.getArticlesFromSearch(searchText: textForSearching, ofSource: inputSource.id, page: currentPage) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

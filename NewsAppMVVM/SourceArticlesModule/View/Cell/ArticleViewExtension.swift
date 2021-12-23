@@ -40,10 +40,10 @@ extension ArticleCell {
         title.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
         
         
-        
+        publishedAt.adjustsFontSizeToFitWidth = true
         publishedAt.translatesAutoresizingMaskIntoConstraints = false
         publishedAt.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10).isActive = true
-//        publishedAt.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10).isActive = true
+        publishedAt.leftAnchor.constraint(equalTo: articleImage.rightAnchor, constant: 10).isActive = true
         publishedAt.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
        
     }

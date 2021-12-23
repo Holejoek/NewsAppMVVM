@@ -18,11 +18,11 @@ class ArticleCell: UITableViewCell, ArticleCellProtocol {
     static var identifier = "ArticleCell"
     
     //MARK: Elements 
-    var containerView = UIView()
-    var title = UILabel(text: "", fontSize: 15, fontName: "Baskerville", textColor: .black, textAlignment: .left, shadowColor: nil, numberOfLines: 4)
-    var author = UILabel(text: "", fontSize: 18, fontName: "Baskerville", textColor: .black, textAlignment: .center, shadowColor: nil, numberOfLines: 2)
-    var publishedAt = UILabel(text: "", fontSize: 15, fontName: "Baskerville", textColor: .black, textAlignment: .right, shadowColor: nil, numberOfLines: 1)
-    var articleImage = UIImageView(image: UIImage(), cornerRadius: 10)
+    let containerView = UIView()
+    let title = UILabel(text: "", fontSize: 15, fontName: "Baskerville", textColor: .black, textAlignment: .left, shadowColor: nil, numberOfLines: 4)
+    let author = UILabel(text: "", fontSize: 18, fontName: "Baskerville", textColor: .black, textAlignment: .center, shadowColor: nil, numberOfLines: 2)
+    let publishedAt = UILabel(text: "", fontSize: 15, fontName: "Baskerville", textColor: .black, textAlignment: .right, shadowColor: nil, numberOfLines: 1)
+    let articleImage = UIImageView(image: UIImage(), cornerRadius: 10, contentMode: .scaleAspectFill)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,6 +60,7 @@ class ArticleCell: UITableViewCell, ArticleCellProtocol {
         guard let imageURL = URL(string: stringURL) else { return }
         
         //MARK: - SDWebImage
+        self.articleImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         self.articleImage.sd_setImage(with: imageURL) { image, error, _, _ in
             if error != nil {
                 self.articleImage.image = UIImage(named: "notFound") ?? UIImage()
