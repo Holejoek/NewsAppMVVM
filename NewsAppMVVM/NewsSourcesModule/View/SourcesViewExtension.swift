@@ -9,15 +9,21 @@ import Foundation
 import UIKit
 
 
-extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout { // + Animations : UINavigationControllerDelegate
     
     //MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        configureNavBackIten()
+        // Animations
+//        selectedIndexOfCell = indexPath
+//        selectedCell = collectionView.cellForItem(at: selectedIndexOfCell!)
+    
         let sourceArticlesScreen = ModuleBuilder.createSourceArticlesModule(inputSource: self.viewModel.didSelect(indexPath: indexPath))
-            configureNavBackIten() 
-            self.navigationController?.pushViewController(sourceArticlesScreen, animated: true)
+        navigationController?.pushViewController(sourceArticlesScreen, animated: true)
     }
+    
+   
     
     private func configureNavBackIten() {
         let backItem = UIBarButtonItem()
@@ -41,6 +47,12 @@ extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataS
         let sourceName = sourceNames[indexPath.item]
         let sourceCategory = sourceCategories[indexPath.item]
         cell.updateCell(sourceName: sourceName, sourceCategory: sourceCategory)
+         //Animation
+//        if selectedIndexOfCell != nil  {
+//            if selectedIndexOfCell!.row == indexPath.row {
+//                cell.isHidden = true
+//            }
+//        }
         return cell
     }
     
@@ -63,5 +75,19 @@ extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataS
         return UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: insets.right)
     }
     
-    
+    //MARK: - UINavigationControllerDelegate
+    //Animation
+//    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        guard let cell = selectedCell else { return nil }
+//
+//        if operation == .push {
+//            print(cell.frame, cell)
+//            return SourceCellTransitionAnimator(presentationStartCell: cell, isPresenting: true)
+//
+//        } else if operation == .pop {
+//            return SourceCellTransitionAnimator(presentationStartCell: cell, isPresenting: false)
+//        }
+//        return nil
+//    }
 }
+
