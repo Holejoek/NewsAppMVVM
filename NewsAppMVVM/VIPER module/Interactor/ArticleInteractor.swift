@@ -1,73 +1,35 @@
 //
-//  ArticlesViewModel.swift
+//  Interactor.swift
 //  NewsAppMVVM
 //
-//  Created by Иван Тиминский on 11.12.2021.
+//  Created by Иван Тиминский on 27.12.2021.
 //
 
 import Foundation
-import CoreGraphics
 
-//MARK: Input protocol
-protocol ArticlesViewModelProtocol: AnyObject {
-    init(view: ArticlesViewProtocol, networkService: NetworkServiceProtocol, inputSource: Source)
-    //input tableView
-    func getArticleCellViewModel(indexPath: IndexPath) -> ArticleCellViewModelProtocol
-    func getNumberOfRows(inSection: Int) -> Int
-    func getHeightOfRow(forIndexPath: IndexPath) -> CGFloat
-    func getViewTitle() -> String
-    //dataTransport
-    func didSelect(indexPath: IndexPath) -> Article
-    // networkService
+protocol ArticleInteractorProtocol: AnyObject {
+    
+    var inputSource: Source! { get set }
+    var outputArticles: [Article] { get set }
+    
+    var networkService: NetworkServiceProtocol! { get set }
+    
     func getArticlesFromSourceId()
+    func getArticleForRowAt(indexPath: IndexPath) -> Article
     func getArticlesFromSearchText(text: String)
-    
-}
-//MARK: Output protocol
-protocol ArticlesViewProtocol: AnyObject {
-    func updateCells()
-    func showError()
-    func updating(_ flag: Bool)
 }
 
-
-class ArticlesViewModel: ArticlesViewModelProtocol {
-    
-    required init(view: ArticlesViewProtocol, networkService: NetworkServiceProtocol, inputSource: Source) {
-        self.view = view
-        self.networkService = networkService
-        self.inputSource = inputSource
-    }
-    
+class ArticleInteractor: ArticleInteractorProtocol {
     var networkService: NetworkServiceProtocol!
-    weak var view: ArticlesViewProtocol!
-    let inputSource: Source!
     
+    weak var presenter: ArticlePresenterProtocol!
+    var inputSource: Source!
+    var outputArticles = [Article]()  // MARK: НУЖЕН DIDSET??
     
-    
-    //MARK: - Input TableView
-    func getArticleCellViewModel(indexPath: IndexPath) -> ArticleCellViewModelProtocol {
-        let article = loadedArticles[indexPath.row]
-        getMoreData(indexPath: indexPath, searchFlag: searchFlag)
-        return ArticleCellViewModel(title: article.title, author: article.author, publishedAt: article.convertedDate, imageURL: article.urlToImage)
-    }
-
-    func getNumberOfRows(inSection: Int) -> Int {
-        return loadedArticles.count
-    }
-    
-    func getHeightOfRow(forIndexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-    
-    func getViewTitle() -> String {
-        return inputSource.name
-    }
-    //MARK: - DataTransport
-    
-    func didSelect(indexPath: IndexPath) -> Article {
-        let article = loadedArticles[indexPath.row]
-        return article
+    required init(presenter: ArticlePresenterProtocol, networkService: NetworkServiceProtocol, inputSource: Source) {
+        self.networkService = networkService
+        self.presenter = presenter
+        self.inputSource = inputSource
     }
     
     //MARK: - NetworkService
@@ -76,12 +38,17 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
         executeRequest(with: .load)
     }
     
+    func getArticleForRowAt(indexPath: IndexPath) -> Article {
+        getMoreData(indexPath: indexPath, searchFlag: false)
+        return outputArticles[indexPath.row]
+    }
+    
     func getArticlesFromSearchText(text: String) {
         textForSearching = text.replacingOccurrences(of: " ", with: "_")
         executeRequest(with: .search)
     }
     
-    private var loadedArticles = [Article]()
+    
     private var totalResults: Int!
     private var currentPage: Int = 1
     private var textForSearching: String = ""
@@ -107,7 +74,7 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
         case .search:
             searchFlag = true
             currentPage = 1
-            loadedArticles.removeAll()
+            outputArticles.removeAll()
             searchArticles()
         case .searchMore:
             currentPage += 1
@@ -116,7 +83,7 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
     }
     
     private func loadArticles() {
-        self.view.updating(true)
+//        self.view.updating(activityIndicator: true)
         networkService.getSourceArticles(sourceId: inputSource.id, page: currentPage) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -124,18 +91,19 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
                     guard let articles = articles else {
                         return
                     }
-                    self?.loadedArticles += articles.articles
+                    self?.outputArticles += articles.articles
                     self?.totalResults = articles.totalResults
+                    print( self?.outputArticles )
                 case .failure(let error):
                     print(error)
                 }
-                self?.view.updateCells()
+//                self?.view.updateCells()
             }
         }
     }
     
     private func searchArticles() {
-        self.view.updating(true)
+//        self.view.updating(activityIndicator: true)
         networkService.getArticlesFromSearch(searchText: textForSearching, ofSource: inputSource.id, page: currentPage) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -143,21 +111,20 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
                     guard let articles = articles else {
                         return
                     }
-                    self?.loadedArticles += articles.articles
+                    self?.outputArticles += articles.articles
                     self?.totalResults = articles.totalResults
-                    print(articles.totalResults)
                 case .failure(let error):
                     print(error)
                 }
-                self?.view.updateCells()
+//                self?.view.updateCells()
             }
         }
     }
     
     private func getMoreData(indexPath: IndexPath, searchFlag: Bool ) {
-        guard loadedArticles.count < maxNumberOfResults else { return }
-        guard loadedArticles.count < totalResults else { return }
-        guard loadedArticles[indexPath.row].title == loadedArticles.last?.title  else { return }
+        guard outputArticles.count < maxNumberOfResults else { return }
+        guard outputArticles.count < totalResults else { return }
+        guard outputArticles[indexPath.row].title == outputArticles.last?.title  else { return }
         if searchFlag == false {
             executeRequest(with: .loadMore)
         } else {
@@ -165,3 +132,5 @@ class ArticlesViewModel: ArticlesViewModelProtocol {
         }
     }
 }
+
+

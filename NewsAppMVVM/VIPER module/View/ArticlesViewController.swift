@@ -7,23 +7,30 @@
 
 import UIKit
 
+protocol ArticlesViewProtocol: AnyObject {
+    var presenter: ArticlePresenterProtocol! { get set }
+    
+    func updateCells()
+    func showError()
+    func updating(activityIndicator isActive: Bool)
+}
 
 class ArticlesViewController: UIViewController {
     
-    var viewModel: ArticlesViewModel!
+    var presenter: ArticlePresenterProtocol!
+    
     lazy var articlesTableView: UITableView = makeTableView()
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     let searchController = UISearchController()
       
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getArticlesFromSourceId()
-        configureViewController()
-        
+        presenter.viewDidLoad()
+        configureViewController()        
     }
     
     private func configureViewController() {
-        title = viewModel.getViewTitle()
+        title = presenter.getTitle()
         view.createGradient(firstColor: .firstMainBack, secondColor: .secondMainBack, startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 0, y: 1), isAnimated: false, finalGradien: nil)
         
         //DismissKeyBoard
@@ -65,19 +72,22 @@ class ArticlesViewController: UIViewController {
   
 }
 
+
 extension ArticlesViewController: ArticlesViewProtocol {
     func showError() {
         return
     }
     
     func updateCells() {
-        articlesTableView.reloadData()
-        updating(false)
+        DispatchQueue.main.async {
+            self.articlesTableView.reloadData()
+            self.updating(activityIndicator: false)
+        }
     }
     
-    func updating(_ flag: Bool) {
-        activityIndicator.isHidden = flag
-        switch flag {
+    func updating(activityIndicator isActive: Bool) {
+        activityIndicator.isHidden = isActive
+        switch isActive {
         case true:
             activityIndicator.startAnimating()
         case false:

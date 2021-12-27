@@ -19,8 +19,8 @@ extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        selectedIndexOfCell = indexPath
 //        selectedCell = collectionView.cellForItem(at: selectedIndexOfCell!)
     
-        let sourceArticlesScreen = ModuleBuilder.createSourceArticlesModule(inputSource: self.viewModel.didSelect(indexPath: indexPath))
-        navigationController?.pushViewController(sourceArticlesScreen, animated: true)
+        let sourceArticlesScreen = ModuleBuilder.createSourceArticlesModule(inputSource: self.viewModel.didSelect(indexPath: indexPath)).entry
+        navigationController?.pushViewController(sourceArticlesScreen!, animated: true)
     }
     
    

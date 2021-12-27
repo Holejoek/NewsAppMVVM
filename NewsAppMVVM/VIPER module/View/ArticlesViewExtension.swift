@@ -12,27 +12,27 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     //MARK: DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getNumberOfRows(inSection: section)
+        return presenter?.getNuberOfRows(forSection: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.getCell(from: viewModel.getArticleCellViewModel(indexPath: indexPath)) as! UITableViewCell
+        return tableView.getCell(from: presenter.getArticleCellViewModel(indexPath: indexPath)) as! UITableViewCell
     }
     
     //MARK: Delegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        viewModel.getHeightOfRow(forIndexPath: indexPath)
+        CGFloat(presenter.getHeightOfRow(forIndexPath: indexPath))
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        configureNavBackIten()
-        
-        let article = viewModel.didSelect(indexPath: indexPath)
-        guard let source = viewModel.inputSource else { return }
-        let nextScreen = ModuleBuilder.createDetailArticleModule(inputArticle: article, inputSource: source)
-        self.navigationController?.pushViewController(nextScreen, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        configureNavBackIten()
+//
+//        let article = viewModel.didSelect(indexPath: indexPath)
+//        guard let source = viewModel.inputSource else { return }
+//        let nextScreen = ModuleBuilder.createDetailArticleModule(inputArticle: article, inputSource: source)
+//        self.navigationController?.pushViewController(nextScreen, animated: true)
+//    }
     
     private func configureNavBackIten() {
         let backItem = UIBarButtonItem()
@@ -45,7 +45,7 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UI
     //MARK: - UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-        viewModel.getArticlesFromSearchText(text: searchText)
+//        viewModel.getArticlesFromSearchText(text: searchText)
     }
     
 }
