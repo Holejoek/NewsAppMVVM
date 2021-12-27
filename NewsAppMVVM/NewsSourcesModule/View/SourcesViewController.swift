@@ -14,13 +14,19 @@ class SourcesViewController: UIViewController {
     lazy var collectionView: UICollectionView = makeCollectionView()
     var sourceNames = [String]()
     var sourceCategories = [String]()
+    // Animations
+    // Свойства для анимации перехода
+//    var selectedIndexOfCell: IndexPath?
+//    var selectedCell: UICollectionViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         makeDataBinding()
-        self.collectionView.reloadData()
+        collectionView.reloadData()
         viewModel.getSources()
+        //Animation
+//        self.navigationController?.delegate = self
     }
     
     private func configureViewController() {
@@ -41,7 +47,6 @@ class SourcesViewController: UIViewController {
         let safeAreaInsets = UIApplication.shared.windows[0].safeAreaInsets.top + (self.navigationController?.navigationBar.frame.height ?? 0)  // Необходимо найти альтернативу
         collectionView.frame.origin.y = safeAreaInsets
         collectionView.frame.size.height -= safeAreaInsets
-        
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
         return collectionView
@@ -76,5 +81,4 @@ extension SourcesViewController: SourcesViewProtocol {
         self.collectionView.reloadData()
     }
 }
-
 

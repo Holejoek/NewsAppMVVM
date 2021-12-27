@@ -26,10 +26,20 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        configureNavBackIten()
+        
         let article = viewModel.didSelect(indexPath: indexPath)
         guard let source = viewModel.inputSource else { return }
         let nextScreen = ModuleBuilder.createDetailArticleModule(inputArticle: article, inputSource: source)
         self.navigationController?.pushViewController(nextScreen, animated: true)
+    }
+    
+    private func configureNavBackIten() {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        backItem.style = .plain
+        backItem.tintColor = .black
+        navigationItem.backBarButtonItem = backItem
     }
     
     //MARK: - UISearchResultsUpdating
