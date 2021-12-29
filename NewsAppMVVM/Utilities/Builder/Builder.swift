@@ -10,7 +10,7 @@ import UIKit
 
 protocol ModuleBuilderProtocol {
     static func createNewsSourcesModule() -> UIViewController
-    static func createSourceArticlesModule(inputSource: Source) -> ArticleRouterProtocol
+    static func createSourceArticlesModule(using navigationController: UINavigationController, inputSource: Source) -> UIViewController
     static func createDetailArticleModule(inputArticle: Article, inputSource: Source) -> UIViewController
 }
 
@@ -23,8 +23,8 @@ final class ModuleBuilder: ModuleBuilderProtocol {
         return view
     }
     
-    static func createSourceArticlesModule(inputSource: Source) -> ArticleRouterProtocol {
-        let router = ArticleRouter()
+    static func createSourceArticlesModule(using navigationController: UINavigationController, inputSource: Source) -> UIViewController {
+        let router = ArticleRouter(using: navigationController)
         let networkService = NetworkService()
         
         let view: ArticlesViewProtocol = ArticlesViewController()
@@ -36,8 +36,8 @@ final class ModuleBuilder: ModuleBuilderProtocol {
         presenter.interactor = interactor
         presenter.router = router
         
-        router.entry = view as? EntryPoint
-        return router
+        
+        return view as? UIViewController ?? UIViewController()
     }
     
     static func createDetailArticleModule(inputArticle: Article, inputSource: Source) -> UIViewController {

@@ -8,11 +8,32 @@
 import Foundation
 import UIKit
 
+extension ArticlesViewController: ArticlesViewProtocol {
+    func showError(with: Error) {
+        return
+    }
+    
+    func updateCells() {
+        self.showActivityIndicator(isActive: false)
+        self.articlesTableView.reloadData()
+    }
+    
+    func showActivityIndicator(isActive: Bool) {
+        activityIndicator.isHidden = !isActive
+        switch isActive {
+        case true:
+            activityIndicator.startAnimating()
+        case false:
+            activityIndicator.stopAnimating()
+        }
+    }
+}
+
 extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
     //MARK: DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.getNuberOfRows(forSection: section) ?? 0
+        return presenter?.getNumberOfRows(forSection: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -25,27 +46,24 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UI
         CGFloat(presenter.getHeightOfRow(forIndexPath: indexPath))
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        configureNavBackIten()
-//
-//        let article = viewModel.didSelect(indexPath: indexPath)
-//        guard let source = viewModel.inputSource else { return }
-//        let nextScreen = ModuleBuilder.createDetailArticleModule(inputArticle: article, inputSource: source)
-//        self.navigationController?.pushViewController(nextScreen, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        configureNavBackIten()
+        presenter.didSelectRowAt(indexPath: indexPath)
+    }
     
     private func configureNavBackIten() {
         let backItem = UIBarButtonItem()
         backItem.title = ""
         backItem.style = .plain
         backItem.tintColor = .black
+        
         navigationItem.backBarButtonItem = backItem
     }
     
     //MARK: - UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-//        viewModel.getArticlesFromSearchText(text: searchText)
+        presenter.getArticlesFromSearchText(text: searchText)
     }
     
 }
