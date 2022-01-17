@@ -12,11 +12,12 @@ class ArticlePresenter: ArticlePresenterProtocol {
     var router: ArticleRouterProtocol!
     var interactor: ArticleInteractorProtocol!
     weak var view: ArticlesViewProtocol!
+    
     required init(view: ArticlesViewProtocol) {
         self.view = view
     }
     
-    func notifyViewDidLoad() {
+    func notifyThatViewDidLoad() {
         DispatchQueue.main.async {
             self.view.showActivityIndicator(isActive: true)
         }

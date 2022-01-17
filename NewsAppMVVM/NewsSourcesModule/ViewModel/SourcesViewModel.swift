@@ -77,14 +77,14 @@ final class SourcesViewModel: SourcesViewModelProtocol {
     }
     
     func minimumSpacingForItemsInSection() -> CGFloat {
-        return self.spaceBetweenItems
+        return spaceBetweenItems
     }
     
     func sectionInsets() -> (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
-        let top = self.spaceBetweenItems
-        let left = self.spaceBetweenItems
-        let bottom = self.spaceBetweenItems
-        let right = self.spaceBetweenItems
+        let top = spaceBetweenItems
+        let left = spaceBetweenItems
+        let bottom = spaceBetweenItems
+        let right = spaceBetweenItems
         return (top: top, left: left, bottom: bottom, right: right)
     }
     
@@ -121,5 +121,4 @@ final class SourcesViewModel: SourcesViewModelProtocol {
         let selectedSource = sources[selectedItem]
         return selectedSource
     }
-    
 }

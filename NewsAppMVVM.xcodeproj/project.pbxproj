@@ -29,8 +29,6 @@
 		35F635EC2764EAA50044B17C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F635EB2764EAA50044B17C /* Assets.xcassets */; };
 		35F635EF2764EAA50044B17C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35F635ED2764EAA50044B17C /* LaunchScreen.storyboard */; };
 		35F635FA2764EAA60044B17C /* NewsAppMVVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F635F92764EAA60044B17C /* NewsAppMVVMTests.swift */; };
-		35F636042764EAA60044B17C /* NewsAppMVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F636032764EAA60044B17C /* NewsAppMVVMUITests.swift */; };
-		35F636062764EAA60044B17C /* NewsAppMVVMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F636052764EAA60044B17C /* NewsAppMVVMUITestsLaunchTests.swift */; };
 		35F636142764EAD60044B17C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F636132764EAD60044B17C /* NetworkService.swift */; };
 		35F636162764EAED0044B17C /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F636152764EAED0044B17C /* NetworkModel.swift */; };
 		35F636212764EC510044B17C /* SourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F636202764EC510044B17C /* SourceModel.swift */; };
@@ -92,8 +90,6 @@
 		35F635F52764EAA60044B17C /* NewsAppMVVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppMVVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35F635F92764EAA60044B17C /* NewsAppMVVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppMVVMTests.swift; sourceTree = "<group>"; };
 		35F635FF2764EAA60044B17C /* NewsAppMVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppMVVMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		35F636032764EAA60044B17C /* NewsAppMVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppMVVMUITests.swift; sourceTree = "<group>"; };
-		35F636052764EAA60044B17C /* NewsAppMVVMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppMVVMUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		35F636132764EAD60044B17C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		35F636152764EAED0044B17C /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
 		35F636202764EC510044B17C /* SourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceModel.swift; sourceTree = "<group>"; };
@@ -175,7 +171,6 @@
 			children = (
 				35F635E12764EAA30044B17C /* NewsAppMVVM */,
 				35F635F82764EAA60044B17C /* NewsAppMVVMTests */,
-				35F636022764EAA60044B17C /* NewsAppMVVMUITests */,
 				35F635E02764EAA30044B17C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -214,15 +209,6 @@
 				35F635F92764EAA60044B17C /* NewsAppMVVMTests.swift */,
 			);
 			path = NewsAppMVVMTests;
-			sourceTree = "<group>";
-		};
-		35F636022764EAA60044B17C /* NewsAppMVVMUITests */ = {
-			isa = PBXGroup;
-			children = (
-				35F636032764EAA60044B17C /* NewsAppMVVMUITests.swift */,
-				35F636052764EAA60044B17C /* NewsAppMVVMUITestsLaunchTests.swift */,
-			);
-			path = NewsAppMVVMUITests;
 			sourceTree = "<group>";
 		};
 		35F636122764EAB40044B17C /* NetworkService */ = {
@@ -548,8 +534,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35F636042764EAA60044B17C /* NewsAppMVVMUITests.swift in Sources */,
-				35F636062764EAA60044B17C /* NewsAppMVVMUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,11 +25,11 @@ class SourcesCell: UICollectionViewCell {
     }
     
     private func configureShadowLayer() {
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 0)
-        self.layer.shadowRadius = 2
-        self.layer.shadowOpacity = 0.6
-        self.layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 2
+        layer.shadowOpacity = 0.6
+        layer.masksToBounds = false
     }
     
     private func makeCellBackground() {
@@ -39,13 +39,11 @@ class SourcesCell: UICollectionViewCell {
         view.layer.borderWidth = 0.8
         view.layer.borderColor = UIColor.sourceCellBorderColor.cgColor
         view.clipsToBounds = true
-        self.backgroundView = view
+        backgroundView = view
     }
     
     private func configSourceNameLabel() {
         sourceName.adjustsFontSizeToFitWidth = true
-        sourceName.lineBreakMode = .byWordWrapping  // Не работает !?
-        //        sourceName.makeShadowForText()
+        sourceName.lineBreakMode = .byWordWrapping
     }
-    
 }

@@ -19,7 +19,7 @@ class ArticlesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        presenter.notifyViewDidLoad()
+        presenter.notifyThatViewDidLoad()
     }
     
     private func configureViewController() {
@@ -35,7 +35,7 @@ class ArticlesViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
-        self.view.addSubview(tableView)
+        view.addSubview(tableView)
         
         tableView.addSubview(activityIndicator)
         activityIndicator.center = tableView.center
@@ -60,7 +60,7 @@ class ArticlesViewController: UIViewController {
     }
     
     @objc func dismissKeybord(sender: UITapGestureRecognizer) {
-        self.searchController.searchBar.endEditing(true)
+        searchController.searchBar.endEditing(true)
     }
     
 }

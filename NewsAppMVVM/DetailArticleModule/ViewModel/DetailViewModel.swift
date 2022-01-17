@@ -78,6 +78,4 @@ final class DetailViewModel: DetailViewModelProtocol {
             self.view.updateView()
         }
     }
-    
-    
 }

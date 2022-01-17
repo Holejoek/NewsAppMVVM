@@ -29,14 +29,12 @@ extension ArticleCell {
         author.leftAnchor.constraint(equalTo: articleImage.rightAnchor, constant: 10).isActive = true
         author.topAnchor.constraint(equalTo: articleImage.topAnchor, constant: 0).isActive = true
         author.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
-//        author.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         
         title.translatesAutoresizingMaskIntoConstraints = false
         title.leftAnchor.constraint(equalTo: articleImage.rightAnchor, constant: 10).isActive = true
         title.topAnchor.constraint(equalTo: author.bottomAnchor, constant: 10).isActive
         = true
-//        title.bottomAnchor.constraint(equalTo: publishedAt.topAnchor, constant: -10).isActive = true
         title.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
         
         

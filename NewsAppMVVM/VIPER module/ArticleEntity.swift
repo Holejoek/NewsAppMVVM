@@ -33,5 +33,4 @@ struct Article: Codable {
         let stringDate = dateFormatter.string(from: dateDate)
         return stringDate
         }
-
 }

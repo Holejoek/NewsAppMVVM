@@ -36,7 +36,6 @@ class ArticleInteractor: ArticleInteractorProtocol {
         executeRequest(with: .search)
     }
     
-    
     private var totalResults: Int!
     private var currentPage: Int = 1
     private var textForSearching: String = ""

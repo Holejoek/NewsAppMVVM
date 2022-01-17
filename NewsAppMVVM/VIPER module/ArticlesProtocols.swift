@@ -31,7 +31,7 @@ protocol ArticlePresenterProtocol: AnyObject {
     var router: ArticleRouterProtocol! { get set }
     var interactor: ArticleInteractorProtocol! { get set }
     
-    func notifyViewDidLoad()
+    func notifyThatViewDidLoad()
     
     func getNumberOfRows(forSection: Int) -> Int
     func getTitle() -> String

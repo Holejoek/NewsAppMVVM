@@ -55,7 +55,7 @@ class DetailViewController: UIViewController {
     }
 }
 
-//ViewModelOutput
+//MARK: View - ViewModel  (Output)
 extension DetailViewController: DetailViewControllerProtocol {
     
     func updateView() {
@@ -64,7 +64,6 @@ extension DetailViewController: DetailViewControllerProtocol {
         content.text = viewModel.getContent()
         publishedAt.text = viewModel.getPublishedDate()
         articleURL.text = viewModel.getArticleURL()
-        
         
         //MARK: SDWebImage
         
@@ -79,5 +78,4 @@ extension DetailViewController: DetailViewControllerProtocol {
             }
         }
     }
-    
 }

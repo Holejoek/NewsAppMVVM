@@ -14,8 +14,8 @@ extension ArticlesViewController: ArticlesViewProtocol {
     }
     
     func updateCells() {
-        self.showActivityIndicator(isActive: false)
-        self.articlesTableView.reloadData()
+        showActivityIndicator(isActive: false)
+        articlesTableView.reloadData()
     }
     
     func showActivityIndicator(isActive: Bool) {
@@ -31,7 +31,7 @@ extension ArticlesViewController: ArticlesViewProtocol {
 
 extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
-    //MARK: DataSource
+    //MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter?.getNumberOfRows(forSection: section) ?? 0
     }
@@ -40,7 +40,7 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UI
         return tableView.getCell(from: presenter.getArticleCellViewModel(indexPath: indexPath)) as! UITableViewCell
     }
     
-    //MARK: Delegate
+    //MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         CGFloat(presenter.getHeightOfRow(forIndexPath: indexPath))
@@ -61,11 +61,11 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource, UI
     }
     
     //MARK: - UISearchResultsUpdating
+    
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
         presenter.getArticlesFromSearchText(text: searchText)
     }
-    
 }
 
 extension UITableView {

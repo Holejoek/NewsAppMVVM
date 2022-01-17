@@ -18,7 +18,7 @@ extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataS
         // Animations
 //        selectedIndexOfCell = indexPath
 //        selectedCell = collectionView.cellForItem(at: selectedIndexOfCell!)
-    
+    //MARK: Переход на след. экран
         let sourceArticlesScreen = ModuleBuilder.createSourceArticlesModule(using: navigationController ?? UINavigationController(), inputSource: self.viewModel.didSelect(indexPath: indexPath))
         navigationController?.pushViewController(sourceArticlesScreen, animated: true)
     }
