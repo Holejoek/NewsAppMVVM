@@ -18,13 +18,11 @@ class ArticlePresenter: ArticlePresenterProtocol {
     }
     
     func notifyThatViewDidLoad() {
-        DispatchQueue.main.async {
-            self.view.showActivityIndicator(isActive: true)
-        }
         interactor.getArticlesFromSourceId()
         interactor.outputArticles.bind { [weak self] _ in
             self?.view.updateCells()
         }
+        view.showActivityIndicator(isActive: true)
     }
     
     func getNumberOfRows(forSection: Int) -> Int {

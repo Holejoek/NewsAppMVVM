@@ -15,6 +15,8 @@ class NewsAppMVVMTests: XCTestCase {
     var view: ArticlesViewControllerMock!
     var networkService: NetworkServiceMock!
     var router: ArticleRouterMock!
+    
+//    let expectation = XCTestExpectation!
     let inputSource = Source(id: "007", name: "Boston", description: "My name is Newspapaer", url: "//lol", category: "Category", language: "Russian", country: "Polska")
     
     
@@ -32,7 +34,8 @@ class NewsAppMVVMTests: XCTestCase {
         presenter.router = router
     }
 
-    func testViewDidLoad() {   // ОШИБКА ИЗ-ЗА асинхронности? надо разобраться
+    func testNotifyThatViewDidLoad() {
+        
         presenter.notifyThatViewDidLoad()
         
         XCTAssertTrue(view.isShowActivityIndicatorCalled)

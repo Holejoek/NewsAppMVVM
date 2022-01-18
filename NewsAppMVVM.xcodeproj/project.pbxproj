@@ -142,6 +142,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		3534598C2796F50500A4D38E /* VIPERArticlesModule */ = {
+			isa = PBXGroup;
+			children = (
+				35F635F92764EAA60044B17C /* NewsAppMVVMTests.swift */,
+			);
+			path = VIPERArticlesModule;
+			sourceTree = "<group>";
+		};
 		35F1A4E7276652F5001B85C8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +198,7 @@
 		35F635F82764EAA60044B17C /* NewsAppMVVMTests */ = {
 			isa = PBXGroup;
 			children = (
-				35F635F92764EAA60044B17C /* NewsAppMVVMTests.swift */,
+				3534598C2796F50500A4D38E /* VIPERArticlesModule */,
 			);
 			path = NewsAppMVVMTests;
 			sourceTree = "<group>";
