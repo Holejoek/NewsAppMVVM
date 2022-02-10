@@ -16,7 +16,8 @@ class ArticlePresenter: ArticlePresenterProtocol {
     required init(view: ArticlesViewProtocol) {
         self.view = view
     }
-    
+    /// Сообщаем интерактору  - надо найти список статей по айди источника
+    /// Ставим обсервер на обновление найденных статей
     func notifyThatViewDidLoad() {
         interactor.getArticlesFromSourceId()
         interactor.outputArticles.bind { [weak self] _ in
