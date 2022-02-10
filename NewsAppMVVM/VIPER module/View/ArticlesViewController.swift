@@ -30,7 +30,7 @@ class ArticlesViewController: UIViewController {
     }
     
     private func makeTableView() -> UITableView {
-        let tableView = UITableView(frame: self.view.bounds)
+        let tableView = UITableView(frame: view.bounds)
         tableView.register(ArticleCell.self, forCellReuseIdentifier: ArticleCell.identifier )
         tableView.dataSource = self
         tableView.delegate = self
@@ -46,12 +46,13 @@ class ArticlesViewController: UIViewController {
     private func configureSearchController() {
         navigationItem.searchController = searchController
         navigationItem.searchController?.searchResultsUpdater = self
-        navigationItem.searchController?.hidesNavigationBarDuringPresentation = true
+        navigationItem.searchController?.hidesNavigationBarDuringPresentation = false
         navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
         
         
         searchController.searchBar.placeholder = "Only English please"
         searchController.searchBar.searchTextField.backgroundColor = .secondMainBack
+//        searchController.pre
         
         //DismissKeyBoard
         let tapScreen = UITapGestureRecognizer(target: self, action: #selector(dismissKeybord))

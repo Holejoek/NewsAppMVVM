@@ -35,8 +35,8 @@ class ArticleCell: UITableViewCell, ArticleCellProtocol {
     }
     
     private func addElementsOnCell(){
-        self.backgroundColor = .clear
-        self.addSubview(containerView)
+        backgroundColor = .clear
+        addSubview(containerView)
         containerView.addSubview(title)
         containerView.addSubview(author)
         containerView.addSubview(publishedAt)
@@ -47,26 +47,27 @@ class ArticleCell: UITableViewCell, ArticleCellProtocol {
 
     func configure(with viewModel: ArticleCellViewModelProtocol) {
         guard let viewModel = viewModel as? ArticleCellViewModel else {
-            self.title.text = "Error"
-            self.author.text = ""
-            self.publishedAt.text = ""
-            self.articleImage.image = UIImage()
+            title.text = "Error"
+            author.text = ""
+            publishedAt.text = ""
+            articleImage.image = UIImage()
             return
         }
-        self.title.text = viewModel.title
-        self.author.text = viewModel.author
-        self.publishedAt.text = viewModel.publishedAt
+        title.text = viewModel.title
+        author.text = viewModel.author
+        publishedAt.text = viewModel.publishedAt
         guard let stringURL = viewModel.imageURL else { return }
         guard let imageURL = URL(string: stringURL) else { return }
         
         //MARK: - SDWebImage
-        self.articleImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        self.articleImage.sd_setImage(with: imageURL) { image, error, _, _ in
+        articleImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        articleImage.sd_setImage(with: imageURL) { [weak self] image, error, _, _ in
+            guard let strongSelf = self else { return }
             if error != nil {
-                self.articleImage.image = UIImage(named: "notFound") ?? UIImage()
+                strongSelf.articleImage.image = UIImage(named: "notFound") ?? UIImage()
             }
             if image == nil {
-                self.articleImage.image = UIImage(named: "notFound") ?? UIImage()
+                strongSelf.articleImage.image = UIImage(named: "notFound") ?? UIImage()
             }
         }
     }

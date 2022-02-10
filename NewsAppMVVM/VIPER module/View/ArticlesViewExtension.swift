@@ -19,12 +19,12 @@ extension ArticlesViewController: ArticlesViewProtocol {
     }
     
     func showActivityIndicator(isActive: Bool) {
-        self.activityIndicator.isHidden = !isActive
+        activityIndicator.isHidden = !isActive
         switch isActive {
         case true:
-            self.activityIndicator.startAnimating()
+            activityIndicator.startAnimating()
         case false:
-            self.activityIndicator.stopAnimating()
+            activityIndicator.stopAnimating()
         }
     }
 }

@@ -74,8 +74,8 @@ final class DetailViewModel: DetailViewModelProtocol {
     }
     
     private func updateView() {
-        DispatchQueue.main.async {
-            self.view.updateView()
+        DispatchQueue.main.async { [weak self] in 
+            self?.view.updateView()
         }
     }
 }

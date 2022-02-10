@@ -33,7 +33,7 @@ class SourcesCell: UICollectionViewCell {
     }
     
     private func makeCellBackground() {
-        let view = UIView(frame: self.bounds)
+        let view = UIView(frame: bounds)
         view.createGradient(firstColor: .firstSourceCellBack, secondColor: .secondSourceCellBack, startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 0, y: 1), isAnimated: false, finalGradien: nil)
         view.layer.cornerRadius = 8
         view.layer.borderWidth = 0.8

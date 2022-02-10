@@ -19,7 +19,7 @@ extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        selectedIndexOfCell = indexPath
 //        selectedCell = collectionView.cellForItem(at: selectedIndexOfCell!)
     //MARK: Переход на след. экран
-        let sourceArticlesScreen = ModuleBuilder.createSourceArticlesModule(using: navigationController ?? UINavigationController(), inputSource: self.viewModel.didSelect(indexPath: indexPath))
+        let sourceArticlesScreen = ModuleBuilder.createSourceArticlesModule(using: navigationController ?? UINavigationController(), inputSource: viewModel.didSelect(indexPath: indexPath))
         navigationController?.pushViewController(sourceArticlesScreen, animated: true)
     }
     
@@ -59,19 +59,19 @@ extension SourcesViewController: UICollectionViewDelegate, UICollectionViewDataS
     //MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        self.viewModel.sizeForItem(sizeOfView: view.frame.size)
+        viewModel.sizeForItem(sizeOfView: view.frame.size)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        self.viewModel.minimumSpacingForItemsInSection()
+        viewModel.minimumSpacingForItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        self.viewModel.minimumSpacingForItemsInSection()
+        viewModel.minimumSpacingForItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let insets = self.viewModel.sectionInsets()
+        let insets = viewModel.sectionInsets()
         return UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: insets.right)
     }
     

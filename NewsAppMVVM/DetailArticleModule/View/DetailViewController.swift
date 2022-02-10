@@ -35,22 +35,22 @@ class DetailViewController: UIViewController {
     
     
     func viewConfiguration() {
-        self.view.createGradient(firstColor: .firstMainBack, secondColor: .secondMainBack, startPoint: CGPoint(x: 0,y: 0), endPoint: CGPoint(x: 0,y: 1), isAnimated: true, finalGradien: [.startSecondMainBack, .startFirstMainBack])
+        view.createGradient(firstColor: .firstMainBack, secondColor: .secondMainBack, startPoint: CGPoint(x: 0,y: 0), endPoint: CGPoint(x: 0,y: 1), isAnimated: true, finalGradien: [.startSecondMainBack, .startFirstMainBack])
         title = viewModel.getControllerTitle()
         
         addElements()
     }
     
     private func addElements() {
-        self.view.addSubview(scrollView)
-        self.scrollView.addSubview(contentView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
-        self.contentView.addSubview(author)
-        self.contentView.addSubview(articleTitle)
-        self.contentView.addSubview(content)
-        self.contentView.addSubview(publishedAt)
-        self.contentView.addSubview(articleImage)
-        self.contentView.addSubview(articleURL)
+        contentView.addSubview(author)
+        contentView.addSubview(articleTitle)
+        contentView.addSubview(content)
+        contentView.addSubview(publishedAt)
+        contentView.addSubview(articleImage)
+        contentView.addSubview(articleURL)
         
     }
 }
@@ -69,12 +69,15 @@ extension DetailViewController: DetailViewControllerProtocol {
         
         guard let urlToImage = URL(string: viewModel.getImageURL()) else { return }
         
-        articleImage.sd_setImage(with: urlToImage) { image, error, _, _ in
+        articleImage.sd_setImage(with: urlToImage) { [weak self] image, error, _, _ in
+            guard let strongSelf = self else {
+                return
+            }
             if error != nil {
-                self.articleImage.image = UIImage(named: "notFound") ?? UIImage()
+                strongSelf.articleImage.image = UIImage(named: "notFound") ?? UIImage()
             }
             if image == nil {
-                self.articleImage.image = UIImage(named: "notFound") ?? UIImage()
+                strongSelf.articleImage.image = UIImage(named: "notFound") ?? UIImage()
             }
         }
     }

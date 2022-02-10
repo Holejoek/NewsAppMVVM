@@ -17,6 +17,6 @@ class ArticleRouter: ArticleRouterProtocol {
     
     func goToDetailArticleModule(inputArticle: Article, inputSource: Source, animated: Bool) {
         let nextScreen = ModuleBuilder.createDetailArticleModule(inputArticle: inputArticle, inputSource: inputSource)
-        self.navigationController.pushViewController(nextScreen, animated: animated)
+        navigationController.pushViewController(nextScreen, animated: animated)
     }
 }

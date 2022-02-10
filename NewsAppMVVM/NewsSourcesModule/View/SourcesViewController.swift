@@ -53,11 +53,13 @@ class SourcesViewController: UIViewController {
     }
     
     private func makeDataBinding() {
-        self.viewModel.sourceNames.bind { [weak self] names in
-            self?.sourceNames = names
+        viewModel.sourceNames.bind { [weak self] names in
+            guard let strongSelf = self else { return }
+            strongSelf.sourceNames = names
         }
-        self.viewModel.sourceCategories.bind { [weak self] categories in
-            self?.sourceCategories = categories
+        viewModel.sourceCategories.bind { [weak self] categories in
+            guard let strongSelf = self else { return }
+            strongSelf.sourceCategories = categories
         }
     }
 }
@@ -75,7 +77,7 @@ extension SourcesViewController: SourcesViewProtocol {
         }
         let errorNetAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         errorNetAlert.addAction(errorNetAction)
-        self.present(errorNetAlert, animated: true, completion: nil)
+        present(errorNetAlert, animated: true, completion: nil)
     }
     func updateData() {
         collectionView.reloadData()

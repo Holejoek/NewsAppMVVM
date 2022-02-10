@@ -15,7 +15,7 @@ extension UIView {
         gradientLayer.endPoint = endPoint
         gradientLayer.colors = [ firstColor.cgColor, secondColor.cgColor]
         gradientLayer.locations = [0.3, 1]  //чекнуть
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
         if isAnimated {
             let gradientChangeAnimation = CABasicAnimation(keyPath: "colors")
             gradientChangeAnimation.duration = 5.0

@@ -13,10 +13,10 @@ extension ArticleCell {
     
     func makeConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        containerView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        containerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        containerView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        containerView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
         
         articleImage.translatesAutoresizingMaskIntoConstraints = false
         articleImage.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 5).isActive = true

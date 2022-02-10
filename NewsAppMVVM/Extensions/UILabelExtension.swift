@@ -10,10 +10,10 @@ import UIKit
 
 extension UILabel {
     func makeShadowForText(color: UIColor) {
-        self.layer.shadowColor = color.cgColor
-        self.layer.shadowOpacity = 0.7
-        self.layer.shadowRadius = 1
-        self.layer.shadowOffset = CGSize(width: 0, height: 0.1)
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = 0.7
+        layer.shadowRadius = 1
+        layer.shadowOffset = CGSize(width: 0, height: 0.1)
     }
     
     convenience init(text: String, fontSize: CGFloat, fontName: String, textColor: UIColor, textAlignment: NSTextAlignment, shadowColor: UIColor?, numberOfLines: Int) {
@@ -27,7 +27,7 @@ extension UILabel {
         guard let shadowColor = shadowColor else {
             return
         }
-        self.makeShadowForText(color: shadowColor)
+        makeShadowForText(color: shadowColor)
     }
     
 

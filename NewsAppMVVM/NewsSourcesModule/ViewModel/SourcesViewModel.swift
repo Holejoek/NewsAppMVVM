@@ -109,7 +109,7 @@ final class SourcesViewModel: SourcesViewModelProtocol {
     
     @objc func checkTimeNetConnection() {
         if sources == nil {
-            self.view.showError(error: nil,  orSomeErrorText: "Медленное интернет соединение")
+            view.showError(error: nil,  orSomeErrorText: "Медленное интернет соединение")
             return
         }
     }

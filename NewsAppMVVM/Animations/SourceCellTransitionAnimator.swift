@@ -56,10 +56,10 @@ class SourceCellTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
 //
         UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext),
                                 delay: 0,
-                                options: .calculationModeCubic) {
+                                options: .calculationModeCubic) { [weak self] in
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1/2) {
                 
-                self.presentationStartCell.layer.transform = AnimationHelper.yRotation(.pi/2)
+                self?.presentationStartCell.layer.transform = AnimationHelper.yRotation(.pi/2)
             }
             
             UIView.addKeyframe(withRelativeStartTime: 1/2, relativeDuration: 1/2) {
@@ -68,8 +68,8 @@ class SourceCellTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
                 presentedView.layer.transform = AnimationHelper.yRotation(0)
                 presentedView.frame = finalFrame
             }
-        } completion: { finished in
-            self.presentationStartCell.removeFromSuperview()
+        } completion: { [weak self] finished in
+            self?.presentationStartCell.removeFromSuperview()
             presentedViewController.view.isHidden = false
             transitionContext.completeTransition(finished)
             
